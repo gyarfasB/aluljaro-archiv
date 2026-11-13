@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Aluljáró — egy falarchívum</title>
+  <meta name="description" content="Egy egri gyalogos aluljáró graffitijeinek élő archívuma." />
+  <link rel="icon" href="images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&amp;display=swap" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="page">
+    <header class="site-header">
+      <div class="header-bg" aria-hidden="true"></div>
+      <div class="brand">
+        <p class="eyebrow" id="site-eyebrow"></p>
+        <h1 id="site-title"></h1>
+        <p class="lede" id="site-lede"></p>
+      </div>
+      <div class="header-aside">
+        <p class="placeholder-flag">Prototípus  ·  helyőrző képek</p>
+        <p class="place" id="site-place"></p>
+      </div>
+    </header>
+
+    <section class="viewer" aria-label="Az aluljáró falainak nézete">
+      <div class="viewer-toolbar">
+        <div class="wall-toggle" role="tablist" aria-label="Fal választása" id="wall-toggle"></div>
+        <p class="hint">Húzd a falat, görgess, vagy használd a nyilakat</p>
+      </div>
+
+      <div class="stage-block">
+        <div class="stage">
+          <button type="button" class="nudge nudge-prev" id="nudge-prev" aria-label="Görgetés balra">
+            <span aria-hidden="true">‹</span>
+          </button>
+
+          <div class="strip-viewport" id="viewport" tabindex="0" aria-label="Vízszintesen görgethető fali panorámák">
+            <div class="layers" id="layers">
+              <div class="strip is-visible" id="strip-a"></div>
+              <div class="strip" id="strip-b"></div>
+            </div>
+          </div>
+
+          <button type="button" class="nudge nudge-next" id="nudge-next" aria-label="Görgetés jobbra">
+            <span aria-hidden="true">›</span>
+          </button>
+
+          <div class="vignette" aria-hidden="true"></div>
+        </div>
+
+        <div class="minimap-wrap">
+          <p class="map-kicker">Térkép</p>
+          <div class="minimap" id="minimap" aria-label="Az aluljáró egyszerűsített térképe"></div>
+          <p class="map-legend" aria-hidden="true">szint ↓</p>
+          <p class="map-caption visually-hidden">A pont a kör közepén marad, a pálya a bejárattól (BE) a kijáratig (KI) csúszik alatta. A lépcsők lefelé visznek.</p>
+        </div>
+      </div>
+
+      <div class="below-strip">
+        <div class="edition-bar">
+          <div class="edition-now">
+            <span class="kicker">Bejárás</span>
+            <time id="edition-date" datetime=""></time>
+            <p class="edition-note" id="edition-note"></p>
+          </div>
+
+          <div class="slider-block">
+            <label class="visually-hidden" for="time-slider">Időcsúszka: válassz egy bejárást</label>
+            <input type="range" id="time-slider" min="0" step="1" value="0" />
+            <div class="ticks" id="slider-ticks"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="site-footer">
+      <p id="site-footnote"></p>
+      <p class="footer-meta">a művek az alkotók szellemi tulajdonát képezik  ·  kérdés esetén üzenj az aluljáró falán!</p>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
