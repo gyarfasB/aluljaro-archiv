@@ -1,0 +1,114 @@
+# Pages CMS (app.pagescms.org). A mentés a main ágra commitol,
+# és a meglevő GitHub Action közzéteszi az oldalt.
+#
+# A képfeltöltés a CMS szerverén megy át, base64-ként, és a kérés
+# 4,5 MB fölött elhasal. Egy panoráma ezért legfeljebb 3 MB lehet.
+# A név maradjon BAL_1.jpg, BAL_2.jpg, … és JOBB_1.jpg, JOBB_2.jpg, …
+
+media:
+  - name: panoramak
+    label: Panorámák
+    input: latitasok
+    output: latitasok
+    extensions: [jpg, jpeg]
+    rename: false
+
+settings:
+  hide: true
+  content:
+    merge: true
+  commit:
+    identity: user
+    templates:
+      create: "Új: {path}"
+      update: "Módosítás: {path}"
+      delete: "Törlés: {path}"
+      rename: "Átnevezés: {oldPath} → {newPath}"
+
+content:
+  - name: bejarasok
+    label: Bejárások
+    type: collection
+    path: latitasok
+    filename: "{date}/bejaras.yml"
+    format: yaml
+    view:
+      layout: tree
+      primary: date
+      fields: [date, note]
+      sort: [date]
+      default:
+        sort: date
+        order: desc
+      node:
+        filename: bejaras.yml
+        hideDirs: others
+    fields:
+      - name: date
+        label: Dátum
+        type: date
+        required: true
+        description: "A látogatás napja. Mentéskor ebből lesz a mappa (latitasok/ÉÉÉÉ-HH-NN). Utána a Panorámák között nyisd meg ezt a mappát, és töltsd fel a képeket: BAL_1.jpg, BAL_2.jpg, … és JOBB_1.jpg, JOBB_2.jpg, … Egy kép legfeljebb 3 MB. A dátumot mentés után ne írd át."
+      - name: note
+        label: Megjegyzés
+        type: text
+        description: "Rövid mondat a dátum alatt. Üresen is hagyható. A lépcsős képek vonala a fájl images részében marad; azt ez a mező nem írja felül."
+
+  - name: oldal
+    label: Az oldal szövegei
+    type: file
+    path: site/site.yml
+    format: yaml
+    fields:
+      - name: title
+        label: Cím
+        type: string
+        required: true
+      - name: eyebrow
+        label: Felirat a cím fölött
+        type: string
+        required: true
+      - name: lede
+        label: Bevezető
+        type: text
+        required: true
+      - name: flag
+        label: Jelző a jobb oldalon
+        type: string
+      - name: place
+        label: Helyszín
+        type: text
+        required: true
+      - name: footnote
+        label: Lábléc
+        type: object
+        fields:
+          - name: prefix
+            label: Előtag
+            type: string
+          - name: text
+            label: Link szövege
+            type: string
+          - name: href
+            label: Link címe
+            type: string
+      - name: walls
+        label: Falak
+        type: object
+        list: true
+        description: "Két fal legyen, ebben a sorrendben. Az azonosító left, aztán right. A felirat az, ami a gombon látszik."
+        fields:
+          - name: id
+            label: Azonosító
+            type: select
+            required: true
+            options:
+              values:
+                - value: left
+                  label: Bal oldal (left)
+                - value: right
+                  label: Jobb oldal (right)
+          - name: label
+            label: Felirat a gombon
+            type: string
+            required: true
