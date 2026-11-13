@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="robots" content="noindex" />
+  <title>Kicsinyítő — Aluljáró</title>
+  <link rel="icon" href="../images/favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@500;700;800&amp;family=IBM+Plex+Mono:wght@400;500&amp;family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&amp;display=swap" />
+  <link rel="stylesheet" href="kicsinyito.css" />
+</head>
+<body>
+  <main class="page">
+    <p class="eyebrow">Aluljáró · segéd a feltöltés előtt</p>
+    <h1>Kicsinyítő</h1>
+    <p class="lede">Az ICE-panorámák ide húzhatók. A böngésző 2,9 MB alá kicsinyíti őket, a fájlnév megmarad. Semmi nem megy fel a szerverre.</p>
+
+    <div class="drop" id="drop">
+      <input id="picker" type="file" accept="image/jpeg,.jpg,.jpeg" multiple />
+      <p class="drop-title">Húzd ide a JPEG-eket</p>
+      <p class="drop-or">vagy</p>
+      <button type="button" class="pick" id="pick">Válassz fájlokat</button>
+      <p class="hint">A fal a honlapon 1400 pixel magas. A kicsinyítő ennél többet hagy meg, amíg belefér a méretbe, hogy közelről se legyen homályos.</p>
+    </div>
+
+    <p class="batch" id="batch" hidden></p>
+    <ol class="results" id="results"></ol>
+    <p class="actions">
+      <button type="button" class="zip" id="zip" hidden>Összes letöltése</button>
+    </p>
+  </main>
+  <script src="kicsinyito.js"></script>
+</body>
+</html>
