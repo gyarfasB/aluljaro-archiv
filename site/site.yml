@@ -1,0 +1,17 @@
+# A lap állandó szövegei. Egy-egy bejárás a latitasok/ mappában él.
+# Az első fal nyílik meg.
+
+title: Aluljáró
+eyebrow: "Utcai galéria  ·  Eger"
+lede: "Tárlatvezetés egy egri gyalogos aluljáró alkotásai közt — milyenek a falak most?"
+flag: Eltűnő alkotások
+place: "Gyalogos aluljáró Egerben, a Vár mellett, a vasút alatt."
+footnote:
+  prefix: "borítókép: "
+  text: "@sior_cfs"
+  href: "https://www.instagram.com/sior_cfs/"
+walls:
+  - id: left
+    label: Bal oldal
+  - id: right
+    label: Jobb oldal
