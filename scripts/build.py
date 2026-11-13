@@ -329,6 +329,10 @@ def copy_shell(root: Path, dist: Path) -> None:
     if not images.is_dir():
         fail("Hiányzik a site/images mappa.")
     shutil.copytree(images, dist / "images")
+    # Unlisted helper. The exhibition pages do not link to it.
+    helper = site / "kicsinyito"
+    if helper.is_dir():
+        shutil.copytree(helper, dist / "kicsinyito")
 
 
 def publish_visit(visit: dict, dist: Path) -> dict:

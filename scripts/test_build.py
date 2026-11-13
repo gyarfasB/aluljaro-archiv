@@ -123,6 +123,19 @@ images:
         with self.assertRaises(build.BuildError):
             build.build_site(self.root)
 
+    def test_helper_page_is_copied_and_unlinked(self) -> None:
+        helper = self.root / "site" / "kicsinyito"
+        helper.mkdir()
+        (helper / "index.html").write_text("<!DOCTYPE html><title>Kicsinyítő</title>\n", encoding="utf-8")
+        self.add_visit("2026-11-12", {"BAL_1.jpg": (8, 8)})
+        build.build_site(self.root)
+        copied = (self.root / "dist" / "kicsinyito" / "index.html").read_text(encoding="utf-8")
+        self.assertIn("Kicsinyítő", copied)
+        exhibition = (self.root / "dist" / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("kicsinyito", exhibition)
+        live = (build.ROOT / "site" / "index.html").read_text(encoding="utf-8")
+        self.assertNotIn("kicsinyito", live)
+
     def test_visit_without_metadata_uses_the_folder_date(self) -> None:
         self.add_visit("2026-03-08", {"JOBB_4.jpg": (8, 8), "JOBB_1.jpg": (8, 8)})
         data = self.tunnel()
